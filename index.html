@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="om">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mana Barumsa Barihee - School Management</title>
-<style>
-:root{--primary:#173b68;--primary2:#245b96;--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#687386;--line:#dfe6ef;--danger:#b42318;--ok:#16794c}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans",sans-serif;background:var(--bg);color:var(--text)}
+s",sans-serif;background:var(--bg);color:var(--text)}
 button,input,select{font:inherit}button{border:0;border-radius:9px;padding:10px 14px;background:var(--primary);color:#fff;cursor:pointer}
 button:hover{opacity:.92}button.secondary{background:#e9eef5;color:var(--primary)}button.danger{background:var(--danger)}
 header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:20}.head{max-width:1200px;margin:auto;padding:15px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
@@ -196,13 +188,7 @@ function openTeacherModal(idx=-1){
 function editTeacher(i){openTeacherModal(i)}
 function saveTeacher(i){let t={name:val('tName'),subject:val('tSubject'),grade:val('tGrade')};if(!t.name)return alert('Maqaa guuti.');if(i>=0)db.teachers[i]=t;else db.teachers.push({...t,id:Date.now()});save();closeModal();renderTeachers()}
 function closeModal(){document.getElementById('modal').classList.add('hidden')}
-function renderAttendance(){
- let g=document.getElementById('attGrade')?.value,d=document.getElementById('attDate')?.value||new Date().toISOString().slice(0,10);
- if(!g){document.getElementById('attendanceArea').textContent='Kutaa filadhu.';return}
- let arr=db.students.filter(s=>s.grade===g),a=db.attendance[d]||{};
- document.getElementById('attendanceArea').innerHTML=`<div class="toolbar"><button onclick="saveAttendance('${d}','${g}')">💾 Attendance Kuusi</button></div>
- <div class="tablewrap"><table><thead><tr><th>Barataa</th><th>Attendance</th></tr></thead><tbody>${arr.map((s,i)=>`<tr><td>${esc(s.first)} ${esc(s.father)}</td><td>
- <select data-att="${i}" data-stu="${db.students.indexOf(s)}"><option ${a[db.students.indexOf(s)]==='Present'?'selected':''}>Present</option><option ${a[db.students.indexOf(s)]==='Absent'?'selected':''}>Absent</option><option ${!a[db.students.indexOf(s)]?'selected':''}>Not marked</option></select></td></tr>`).join('')}</tbody></table></div>`;
+function renderAttendance.indexOf(s)}"><option ${a[db.students.indexOf(s)]==='Present'?'selected':''}>Present</option><option ${a[db.students.indexOf(s)]==='Absent'?'selected':''}>Absent</option><option ${!a[db.students.indexOf(s)]?'selected':''}>Not marked</option></select></td></tr>`).join('')}</tbody></table></div>`;
 }
 document.getElementById('attDate').value=new Date().toISOString().slice(0,10);
 function saveAttendance(d,g){
@@ -212,22 +198,4 @@ function saveAttendance(d,g){
 function renderResults(){
  let g=document.getElementById('resGrade')?.value,sub=document.getElementById('resSubject')?.value||'';
  if(!g){document.getElementById('resultsArea').textContent='Kutaa filadhu.';return}
- let arr=db.students.filter(s=>s.grade===g),key=g+'|'+sub;
- let rs=db.results[key]||{};
- document.getElementById('resultsArea').innerHTML=`<div class="toolbar"><button onclick="saveResults('${key}')">💾 Bu'aa Kuusi</button></div>
- <div class="tablewrap"><table><thead><tr><th>Barataa</th><th>Mark /100</th></tr></thead><tbody>${arr.map((s)=>`<tr><td>${esc(s.first)} ${esc(s.father)}</td><td><input class="mark" data-stu="${db.students.indexOf(s)}" type="number" min="0" max="100" value="${esc(rs[db.students.indexOf(s)]||'')}"></td></tr>`).join('')}</tbody></table></div>`;
-}
-function saveResults(key){
- db.results[key]={};document.querySelectorAll('.mark').forEach(x=>{if(x.value!=='')db.results[key][x.dataset.stu]=x.value});
- save();alert('Bu'aan kuufameera.');
-}
-function addUser(){let u=val('newUser'),p=val('newPass');if(!u||!p)return alert('Username fi password guuti.');if(db.users.some(x=>x.u===u))return alert('Username kun jira.');db.users.push({u,p,role:'User'});save();document.getElementById('newUser').value='';document.getElementById('newPass').value='';renderUsers()}
-function renderUsers(){document.getElementById('userRows').innerHTML=db.users.map((x,i)=>`<tr><td>${esc(x.u)}</td><td>${i===0?'Super Admin':'<button class="danger" onclick="deleteUser('+i+')">Haqi</button>'}</td></tr>`).join('')}
-function deleteUser(i){if(confirm('User kana haqquu?')){db.users.splice(i,1);save();renderUsers()}}
-function downloadCSV(){
- let header=['First Name','Father','Grandfather','Sex','DOB','Grade','Student ID'],rows=[header,...db.students.map(s=>[s.first,s.father,s.grandfather,s.sex,s.dob,s.grade,s.id])];
- let csv=rows.map(r=>r.map(x=>`"${String(x??'').replace(/"/g,'""')}"`).join(',')).join('\n');
- let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='barihee_students.csv';a.click();
-}
-</script>
-</body></html>
+ let arr=db.students.filter(s=>s.grade===g),ke
